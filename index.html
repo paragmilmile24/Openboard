@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body{
+            margin : 0px;
+        }
+
+        .fas{
+            font-size: 2rem;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .fa-pencil{
+            font-size: 2rem;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .icon-pallete{
+            height: 75px;
+            width: 700px;
+            background-color: azure;
+
+            border: 1px solid black;
+            display: flex;
+
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .red{
+            height : 50px;
+            width : 50px;
+            border-radius: 50%;
+            background-color: lightcoral;
+        }
+
+        .green{
+            height : 50px;
+            width : 50px;
+            border-radius: 50%;
+            background-color: lightgreen;
+        }
+
+        .blue{
+            height : 50px;
+            width : 50px;
+            border-radius: 50%;
+            background-color: lightblue;
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">   
+</head>
+
+
+<body>
+    <!-- <h1>Canvas Example</h1> -->
+    <div class="icon-pallete">
+        <i class="fa-solid fa-pencil"></i>
+        <i class="fas fa-square"></i>
+        <i class="fas fa-grip-lines-vertical "></i>
+
+        <div class="red"></div>
+        <div class="green"></div>
+        <div class="blue"></div>
+    </div>
+    <!-- <i class="fa fa-car"></i>
+    <i class="fa fa-car" styl e="font-size:48px;"></i>
+    <i class="fa fa-car" style="font-size:60px;color:red;"></i> -->
+    <br>
+    <canvas></canvas>
+</body>
+
+<script>
+    let canvasBoard = document.querySelector("canvas");
+
+    canvasBoard.height = window.innerHeight;
+    canvasBoard.width = window.innerWidth;
+
+    console.log(canvasBoard.height,canvasBoard.width);
+
+    let tool = canvasBoard.getContext("2d");
+    
+    // tool.fillStyle = "blue";
+    // tool.fillRect(0,0,300,300);
+
+    // tool.strokeStyle = "black";
+    // tool.strokeRect(200,29,300,200);
+
+    let currTool = "rectSelected";
+
+    let rectTool = document.querySelector(".fa-square");
+    let lineTool = document.querySelector(".fa-grip-lines-vertical");
+    let pencilTool = document.querySelector(".fa-pencil");
+
+    rectTool.addEventListener("click",function (){
+        currTool = "rectSelected";
+    })
+
+    lineTool.addEventListener("click",function(){
+        currTool = "lineSelected";
+    })
+
+    pencilTool.addEventListener("click",function(){
+        currTool = "pencilSelected";
+    })
+
+    let body = document.querySelector("body");
+
+    let iX,iY,fX,fY;
+
+    //How much bottom the canvas is from screen
+    let boardTop = canvasBoard.getBoundingClientRect().top;
+
+    //How much left it is from screen
+    let boardLeft = canvasBoard.getBoundingClientRect().left;
+
+    let drawingMode = false;
+
+    body.addEventListener("mousedown",function(e){
+
+        let xPos = e.clientX + boardLeft;
+        let yPos = e.clientY - boardTop;
+
+        iX = xPos;
+        iY = yPos;
+
+        if(currTool == "pencilSelected"){
+            drawingMode = true;
+            tool.beginPath();
+            tool.moveTo(iX,iY);
+        }
+
+        console.log(currTool);
+        
+        // alert("Mouse was clicked at " + xPos + " " + yPos);
+    })
+
+    body.addEventListener("mousemove",function(e){
+
+        let xPos = e.clientX + boardLeft;
+        let yPos = e.clientY - boardTop;
+
+        fX = xPos;
+        fY = yPos;
+
+        if(currTool == "pencilSelected"){
+            
+            if(drawingMode == true){
+
+                tool.lineTo(fX,fY);
+                tool.stroke();
+
+                iX = fX;
+                iY = fY;
+            }
+        }
+    })
+
+    body.addEventListener("mouseup",function(e){
+
+        let xPos = e.clientX + boardLeft;
+        let yPos = e.clientY - boardTop;
+
+        fX = xPos;
+        fY = yPos;
+
+        if(currTool == "rectSelected"){
+            tool.strokeRect(iX,iY,fX-iX,fY-iY);
+        }
+        else if(currTool == "lineSelected"){
+            tool.beginPath();            //To begin path
+            tool.moveTo(iX,iY);         //Moves to intial cordinates 
+            tool.lineTo(fX,fY);         //Draw mathematically line from final coordinated to intial coordinates
+            tool.stroke();              //Shows the line on User Interface UI
+
+        }else if(currTool == "pencilSelected"){
+            drawingMode = false;
+        }
+        // alert("Mouse was released at " + xPos + " " + yPos);
+    })
+
+
+    let red = document.querySelector(".red");       //Way 1
+    let green = document.querySelector(".green");      //Way 2
+    let blue = document.querySelector(".blue");
+
+    red.addEventListener("click",function(e){
+        tool.strokeStyle = "lightcoral";
+    });
+
+    green.addEventListener("click",function(e){
+        tool.strokeStyle = "lightgreen";
+    })
+
+    blue.addEventListener("click",function(e){
+        tool.strokeStyle = "lightblue";
+    })
+
+</script>
+</html>

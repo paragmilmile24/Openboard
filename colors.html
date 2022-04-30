@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .outer{
+            height: 100px;
+            width : 400px ;
+            border : 10px solid purple;
+
+            display: flex;
+
+            /* Horizoontal Align */
+            justify-content: space-evenly;
+
+            /* Vertical Align */
+            align-items: center;
+
+            margin-bottom: 50px;
+        }
+
+        .red{
+            height : 50px;
+            width : 50px;
+            border-radius: 50%;
+            background-color: lightcoral;
+        }
+
+        .green{
+            height : 50px;
+            width : 50px;
+            border-radius: 50%;
+            background-color: lightgreen;
+        }
+
+        .blue{
+            height : 50px;
+            width : 50px;
+            border-radius: 50%;
+            background-color: lightblue;
+        }
+
+        .color-area{
+            height: 200px;
+            width: 200px;
+            border: 10px solid red;
+        }
+
+
+    </style>
+    <div class="outer">
+        <div class="red"></div>
+        <div class="green"></div>
+        <div class="blue"></div>
+    </div>
+
+    <div class="color-area"></div>
+
+    <script>
+        let colorarea = document.querySelector(".color-area");
+
+        colorarea.style.backgroundColor = "lightblue";
+
+        let outer = document.querySelector(".outer");
+        let red = document.querySelector(".red");       //Way 1
+        let green = outer.querySelector(".green");      //Way 2
+        let blue = outer.querySelector(".blue");
+
+        red.addEventListener("click",function(e){
+            colorarea.style.backgroundColor = "lightcoral";
+        });
+
+        green.addEventListener("click",function(e){
+            colorarea.style.backgroundColor = "lightgreen";
+        })
+
+        blue.addEventListener("click",function(e){
+            colorarea.style.backgroundColor = "lightblue";
+        })
+
+
+    </script>
+</body>
+</html>
