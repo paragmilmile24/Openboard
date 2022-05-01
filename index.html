@@ -97,22 +97,22 @@
     // tool.strokeStyle = "black";
     // tool.strokeRect(200,29,300,200);
 
-    let currTool = "rectSelected";
+    let currTool = "pencil";
 
     let rectTool = document.querySelector(".fa-square");
     let lineTool = document.querySelector(".fa-grip-lines-vertical");
     let pencilTool = document.querySelector(".fa-pencil");
 
     rectTool.addEventListener("click",function (){
-        currTool = "rectSelected";
+        currTool = "rect";
     })
 
     lineTool.addEventListener("click",function(){
-        currTool = "lineSelected";
+        currTool = "line";
     })
 
     pencilTool.addEventListener("click",function(){
-        currTool = "pencilSelected";
+        currTool = "pencil";
     })
 
     let body = document.querySelector("body");
@@ -135,7 +135,7 @@
         iX = xPos;
         iY = yPos;
 
-        if(currTool == "pencilSelected"){
+        if(currTool == "pencil"){
             drawingMode = true;
             tool.beginPath();
             tool.moveTo(iX,iY);
@@ -154,7 +154,7 @@
         fX = xPos;
         fY = yPos;
 
-        if(currTool == "pencilSelected"){
+        if(currTool == "pencil"){
             
             if(drawingMode == true){
 
@@ -175,16 +175,16 @@
         fX = xPos;
         fY = yPos;
 
-        if(currTool == "rectSelected"){
+        if(currTool == "rect"){
             tool.strokeRect(iX,iY,fX-iX,fY-iY);
         }
-        else if(currTool == "lineSelected"){
+        else if(currTool == "line"){
             tool.beginPath();            //To begin path
             tool.moveTo(iX,iY);         //Moves to intial cordinates 
             tool.lineTo(fX,fY);         //Draw mathematically line from final coordinated to intial coordinates
             tool.stroke();              //Shows the line on User Interface UI
 
-        }else if(currTool == "pencilSelected"){
+        }else if(currTool == "pencil"){
             drawingMode = false;
         }
         // alert("Mouse was released at " + xPos + " " + yPos);

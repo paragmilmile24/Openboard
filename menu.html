@@ -5,85 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <style>
-        .toolbar{
-            border : 1px solid red;
-            border-radius: 4px;
-
-            width: 90vw;
-            margin: 0 auto;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-        }
-
-        .tool-img{
-            height : 50px;
-        }
-
-        .color-container{
-            width : 150px;
-            height: 50px;
-            display: flex;
-            border: 1px solid black;
-            align-items: center;
-            justify-content: space-evenly;
-        }
-
-        .color{
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-        }
-
-        .red{
-            background-color: lightcoral;
-        }
-
-        .green{
-            background-color: lightgreen;
-        }
-
-        .blue{
-            background-color: lightblue;
-        }
-
-        .size-box{
-            border: 1px solid black;
-            height: 30px;
-            width: 150px;
-            justify-content: space-evenly;
-            align-items: center;
-            display: none;
-        }
-
-        .size{
-            background-color: black;
-            border-radius: 50%;
-        }
-
-        .size1{
-            height: 10px;
-            width: 10px;
-        }
-
-        .size2{
-            height: 14px;
-            width: 14px;
-        }
-
-        .size3{
-            height: 18px;
-            width: 18px;
-        }
-
-        .size4{
-            height: 22px;
-            width: 22px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="toolbar">
@@ -107,7 +30,19 @@
         </div>
 
         <div class="tool">
-            <img src="./NewIcons/Download.svg" class="tool-img"></img>
+            <!-- <img src="./NewIcons/Download.svg" class="tool-img" id="rect"></img> -->
+            <i class="fas fa-square" id="rect"></i>
+            <div class="size-box">
+                <div class="size1 size"></div>
+                <div class="size2 size"></div>
+                <div class="size3 size"></div>
+                <div class="size4 size"></div>
+            </div>
+        </div>
+
+        <div class="tool">
+            <!-- <img src="./NewIcons/Download.svg" class="tool-img" id="line"></img> -->
+            <i class="fas fa-grip-lines-vertical" id="line"></i>
             <div class="size-box">
                 <div class="size1 size"></div>
                 <div class="size2 size"></div>
@@ -123,23 +58,201 @@
         </div>
 
     </div>
+    <canvas></canvas>
 </body>
 
 <script>
     let pencil = document.querySelector("#pencil");
     let eraser = document.querySelector("#eraser");
-    let sizebox = document.querySelectorAll(".size-box");
+    let rect = document.querySelector("#rect");
+    let line = document.querySelector("#line");
+    let options = document.querySelectorAll(".size-box");
 
     let currTool = "pencil";
 
     pencil.addEventListener("click",function(e){
-        sizebox[1].style.display = "none";
-        sizebox[0].style.display = "flex";
+        if(currTool == "pencil"){
+            //DOuble click on pencil
+            options[0].style.display = "flex";
+        }else{
+            for(let i=0;i<options.length;i++){
+                options[i].style.display = "none";
+            }
+            if(currTool == "eraser")
+                tool.strokeStyle = "lightcoral";
+            currTool = "pencil";
+        }
     })
 
     eraser.addEventListener("click",function(e){
-        sizebox[0].style.display = "none";
-        sizebox[1].style.display = "flex";
+        if(currTool =="eraser"){
+            //DOuble click on pencil
+            options[1].style.display = "flex";
+        }else{
+            for(let i=0;i<options.length;i++){
+                options[i].style.display = "none";
+            }
+            tool.strokeStyle = "white";
+            currTool = "eraser";
+        } 
     })
+
+    rect.addEventListener("click",function(e){
+        if(currTool =="rect"){
+            //DOuble click on pencil
+            options[2].style.display = "flex";
+        }else{
+            for(let i=0;i<options.length;i++){
+                options[i].style.display = "none";
+            }
+            if(currTool == "eraser")
+                tool.strokeStyle = "lightcoral";
+            currTool = "rect";
+        }
+    })
+
+    line.addEventListener("click",function(e){
+        if(currTool =="line"){
+            //DOuble click on pencil
+            options[3].style.display = "flex";
+        }else{
+            for(let i=0;i<options.length;i++){
+                options[i].style.display = "none";
+            }
+            if(currTool == "eraser")
+                tool.strokeStyle = "lightcoral";
+            currTool = "line";
+        }
+    })
+
+
+</script>
+
+<script>
+    let canvasBoard = document.querySelector("canvas");
+
+    canvasBoard.height = window.innerHeight;
+    canvasBoard.width = window.innerWidth;
+
+    console.log(canvasBoard.height,canvasBoard.width);
+
+    let tool = canvasBoard.getContext("2d");
+    tool.strokeStyle = "lightcoral";
+    // tool.fillStyle = "blue";
+    // tool.fillRect(0,0,300,300);
+
+    // tool.strokeStyle = "black";
+    // tool.strokeRect(200,29,300,200);
+
+    // let currTool = "pencil";
+
+    // let rectTool = document.querySelector(".fa-square");
+    // let lineTool = document.querySelector(".fa-grip-lines-vertical");
+    // let pencilTool = document.querySelector(".fa-pencil");
+
+    rect.addEventListener("click",function (){
+        currTool = "rect";
+    })
+
+    line.addEventListener("click",function(){
+        currTool = "line";
+    })
+
+    pencil.addEventListener("click",function(){
+        currTool = "pencil";
+    })
+
+    let body = document.querySelector("body");
+
+    let iX,iY,fX,fY;
+
+    //How much bottom the canvas is from screen
+    let boardTop = canvasBoard.getBoundingClientRect().top;
+
+    //How much left it is from screen
+    let boardLeft = canvasBoard.getBoundingClientRect().left;
+
+    let drawingMode = false;
+
+    body.addEventListener("mousedown",function(e){
+
+        let xPos = e.clientX + boardLeft;
+        let yPos = e.clientY - boardTop;
+
+        iX = xPos;
+        iY = yPos;
+
+        if(currTool == "pencil" || currTool =="eraser"){
+            drawingMode = true;
+            tool.beginPath();
+            tool.moveTo(iX,iY);
+        }
+
+        console.log(currTool);
+        
+        // alert("Mouse was clicked at " + xPos + " " + yPos);
+    })
+
+    body.addEventListener("mousemove",function(e){
+
+        let xPos = e.clientX + boardLeft;
+        let yPos = e.clientY - boardTop;
+
+        fX = xPos;
+        fY = yPos;
+
+        if(currTool == "pencil" || currTool =="eraser"){
+            
+            if(drawingMode == true){
+
+                tool.lineTo(fX,fY);
+                tool.stroke();
+
+                iX = fX;
+                iY = fY;
+            }
+        }
+    })
+
+    body.addEventListener("mouseup",function(e){
+
+        let xPos = e.clientX + boardLeft;
+        let yPos = e.clientY - boardTop;
+
+        fX = xPos;
+        fY = yPos;
+
+        if(currTool == "rect"){
+            tool.strokeRect(iX,iY,fX-iX,fY-iY);
+        }
+        else if(currTool == "line"){
+            tool.beginPath();            //To begin path
+            tool.moveTo(iX,iY);         //Moves to intial cordinates 
+            tool.lineTo(fX,fY);         //Draw mathematically line from final coordinated to intial coordinates
+            tool.stroke();              //Shows the line on User Interface UI
+
+        }else if(currTool == "pencil" || currTool=='eraser'){
+            drawingMode = false;
+        }
+        // alert("Mouse was released at " + xPos + " " + yPos);
+    })
+
+
+    let red = document.querySelector(".red");       //Way 1
+    let green = document.querySelector(".green");      //Way 2
+    let blue = document.querySelector(".blue");
+
+    red.addEventListener("click",function(e){
+        tool.strokeStyle = "lightcoral";
+    });
+
+    green.addEventListener("click",function(e){
+        tool.strokeStyle = "lightgreen";
+    })
+
+    blue.addEventListener("click",function(e){
+        tool.strokeStyle = "lightblue";
+    })
+
 </script>
 </html>
