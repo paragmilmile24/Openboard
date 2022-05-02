@@ -50,4 +50,32 @@
         <div class="size4 size"></div>
     </div>
 </body>
+
+<script>
+    let sizebox = document.querySelector(".size-box");
+
+    sizebox.addEventListener("click",function(e){
+
+        let elems = ["size1","size2","size3","size4"];
+
+        let allClasses = e.target.classList;
+        let firstClass = allClasses[0];
+
+        let isPresent = elems.includes(firstClass);
+
+        if(isPresent){
+            if(firstClass == "size1"){
+                alert("Size 1 cliced");
+            }
+            else if(firstClass == "size2"){
+                alert("Size 2 cliced");
+            }else if(firstClass == "size3"){
+                alert("Size 3 cliced");
+            }else if(firstClass == "size4"){
+                alert("Size 4 cliced");
+            }
+        }
+    })
+</script>
+
 </html>

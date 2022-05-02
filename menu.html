@@ -61,83 +61,88 @@
     <canvas></canvas>
 </body>
 
+<script src="./setup.js"></script>
+<script src="./draw.js"></script>
+<script src="./colorchange.js"></script>
+<script src="./toolmanipulation.js"></script>
+
 <script>
-    let pencil = document.querySelector("#pencil");
-    let eraser = document.querySelector("#eraser");
-    let rect = document.querySelector("#rect");
-    let line = document.querySelector("#line");
-    let options = document.querySelectorAll(".size-box");
+    // let pencil = document.querySelector("#pencil");
+    // let eraser = document.querySelector("#eraser");
+    // let rect = document.querySelector("#rect");
+    // let line = document.querySelector("#line");
+    // let options = document.querySelectorAll(".size-box");
 
-    let currTool = "pencil";
+    // let currTool = "pencil";
 
-    pencil.addEventListener("click",function(e){
-        if(currTool == "pencil"){
-            //DOuble click on pencil
-            options[0].style.display = "flex";
-        }else{
-            for(let i=0;i<options.length;i++){
-                options[i].style.display = "none";
-            }
-            if(currTool == "eraser")
-                tool.strokeStyle = "lightcoral";
-            currTool = "pencil";
-        }
-    })
+    // pencil.addEventListener("click",function(e){
+    //     if(currTool == "pencil"){
+    //         //DOuble click on pencil
+    //         options[0].style.display = "flex";
+    //     }else{
+    //         for(let i=0;i<options.length;i++){
+    //             options[i].style.display = "none";
+    //         }
+    //         if(currTool == "eraser")
+    //             tool.strokeStyle = "lightcoral";
+    //         currTool = "pencil";
+    //     }
+    // })
 
-    eraser.addEventListener("click",function(e){
-        if(currTool =="eraser"){
-            //DOuble click on pencil
-            options[1].style.display = "flex";
-        }else{
-            for(let i=0;i<options.length;i++){
-                options[i].style.display = "none";
-            }
-            tool.strokeStyle = "white";
-            currTool = "eraser";
-        } 
-    })
+    // eraser.addEventListener("click",function(e){
+    //     if(currTool =="eraser"){
+    //         //DOuble click on pencil
+    //         options[1].style.display = "flex";
+    //     }else{
+    //         for(let i=0;i<options.length;i++){
+    //             options[i].style.display = "none";
+    //         }
+    //         tool.strokeStyle = "white";
+    //         currTool = "eraser";
+    //     } 
+    // })
 
-    rect.addEventListener("click",function(e){
-        if(currTool =="rect"){
-            //DOuble click on pencil
-            options[2].style.display = "flex";
-        }else{
-            for(let i=0;i<options.length;i++){
-                options[i].style.display = "none";
-            }
-            if(currTool == "eraser")
-                tool.strokeStyle = "lightcoral";
-            currTool = "rect";
-        }
-    })
+    // rect.addEventListener("click",function(e){
+    //     if(currTool =="rect"){
+    //         //DOuble click on pencil
+    //         options[2].style.display = "flex";
+    //     }else{
+    //         for(let i=0;i<options.length;i++){
+    //             options[i].style.display = "none";
+    //         }
+    //         if(currTool == "eraser")
+    //             tool.strokeStyle = "lightcoral";
+    //         currTool = "rect";
+    //     }
+    // })
 
-    line.addEventListener("click",function(e){
-        if(currTool =="line"){
-            //DOuble click on pencil
-            options[3].style.display = "flex";
-        }else{
-            for(let i=0;i<options.length;i++){
-                options[i].style.display = "none";
-            }
-            if(currTool == "eraser")
-                tool.strokeStyle = "lightcoral";
-            currTool = "line";
-        }
-    })
+    // line.addEventListener("click",function(e){
+    //     if(currTool =="line"){
+    //         //DOuble click on pencil
+    //         options[3].style.display = "flex";
+    //     }else{
+    //         for(let i=0;i<options.length;i++){
+    //             options[i].style.display = "none";
+    //         }
+    //         if(currTool == "eraser")
+    //             tool.strokeStyle = "lightcoral";
+    //         currTool = "line";
+    //     }
+    // })
 
 
 </script>
 
-<script>
-    let canvasBoard = document.querySelector("canvas");
+<script >
+    // let canvasBoard = document.querySelector("canvas");
 
-    canvasBoard.height = window.innerHeight;
-    canvasBoard.width = window.innerWidth;
+    // canvasBoard.height = window.innerHeight;
+    // canvasBoard.width = window.innerWidth;
 
-    console.log(canvasBoard.height,canvasBoard.width);
+    // console.log(canvasBoard.height,canvasBoard.width);
 
-    let tool = canvasBoard.getContext("2d");
-    tool.strokeStyle = "lightcoral";
+    // let tool = canvasBoard.getContext("2d");
+    // tool.strokeStyle = "lightcoral";
     // tool.fillStyle = "blue";
     // tool.fillRect(0,0,300,300);
 
@@ -150,109 +155,109 @@
     // let lineTool = document.querySelector(".fa-grip-lines-vertical");
     // let pencilTool = document.querySelector(".fa-pencil");
 
-    rect.addEventListener("click",function (){
-        currTool = "rect";
-    })
+    // rect.addEventListener("click",function (){
+    //     currTool = "rect";
+    // })
 
-    line.addEventListener("click",function(){
-        currTool = "line";
-    })
+    // line.addEventListener("click",function(){
+    //     currTool = "line";
+    // })
 
-    pencil.addEventListener("click",function(){
-        currTool = "pencil";
-    })
+    // pencil.addEventListener("click",function(){
+    //     currTool = "pencil";
+    // })
 
-    let body = document.querySelector("body");
+    // let body = document.querySelector("body");
 
-    let iX,iY,fX,fY;
+    // let iX,iY,fX,fY;
 
-    //How much bottom the canvas is from screen
-    let boardTop = canvasBoard.getBoundingClientRect().top;
+    // //How much bottom the canvas is from screen
+    // let boardTop = canvasBoard.getBoundingClientRect().top;
 
-    //How much left it is from screen
-    let boardLeft = canvasBoard.getBoundingClientRect().left;
+    // //How much left it is from screen
+    // let boardLeft = canvasBoard.getBoundingClientRect().left;
 
-    let drawingMode = false;
+    // let drawingMode = false;
 
-    body.addEventListener("mousedown",function(e){
+    // body.addEventListener("mousedown",function(e){
 
-        let xPos = e.clientX + boardLeft;
-        let yPos = e.clientY - boardTop;
+    //     let xPos = e.clientX + boardLeft;
+    //     let yPos = e.clientY - boardTop;
 
-        iX = xPos;
-        iY = yPos;
+    //     iX = xPos;
+    //     iY = yPos;
 
-        if(currTool == "pencil" || currTool =="eraser"){
-            drawingMode = true;
-            tool.beginPath();
-            tool.moveTo(iX,iY);
-        }
+    //     if(currTool == "pencil" || currTool =="eraser"){
+    //         drawingMode = true;
+    //         tool.beginPath();
+    //         tool.moveTo(iX,iY);
+    //     }
 
-        console.log(currTool);
+    //     console.log(currTool);
         
-        // alert("Mouse was clicked at " + xPos + " " + yPos);
-    })
+    //     // alert("Mouse was clicked at " + xPos + " " + yPos);
+    // })
 
-    body.addEventListener("mousemove",function(e){
+    // body.addEventListener("mousemove",function(e){
 
-        let xPos = e.clientX + boardLeft;
-        let yPos = e.clientY - boardTop;
+    //     let xPos = e.clientX + boardLeft;
+    //     let yPos = e.clientY - boardTop;
 
-        fX = xPos;
-        fY = yPos;
+    //     fX = xPos;
+    //     fY = yPos;
 
-        if(currTool == "pencil" || currTool =="eraser"){
+    //     if(currTool == "pencil" || currTool =="eraser"){
             
-            if(drawingMode == true){
+    //         if(drawingMode == true){
 
-                tool.lineTo(fX,fY);
-                tool.stroke();
+    //             tool.lineTo(fX,fY);
+    //             tool.stroke();
 
-                iX = fX;
-                iY = fY;
-            }
-        }
-    })
+    //             iX = fX;
+    //             iY = fY;
+    //         }
+    //     }
+    // })
 
-    body.addEventListener("mouseup",function(e){
+    // body.addEventListener("mouseup",function(e){
 
-        let xPos = e.clientX + boardLeft;
-        let yPos = e.clientY - boardTop;
+    //     let xPos = e.clientX + boardLeft;
+    //     let yPos = e.clientY - boardTop;
 
-        fX = xPos;
-        fY = yPos;
+    //     fX = xPos;
+    //     fY = yPos;
 
-        if(currTool == "rect"){
-            tool.strokeRect(iX,iY,fX-iX,fY-iY);
-        }
-        else if(currTool == "line"){
-            tool.beginPath();            //To begin path
-            tool.moveTo(iX,iY);         //Moves to intial cordinates 
-            tool.lineTo(fX,fY);         //Draw mathematically line from final coordinated to intial coordinates
-            tool.stroke();              //Shows the line on User Interface UI
+    //     if(currTool == "rect"){
+    //         tool.strokeRect(iX,iY,fX-iX,fY-iY);
+    //     }
+    //     else if(currTool == "line"){
+    //         tool.beginPath();            //To begin path
+    //         tool.moveTo(iX,iY);         //Moves to intial cordinates 
+    //         tool.lineTo(fX,fY);         //Draw mathematically line from final coordinated to intial coordinates
+    //         tool.stroke();              //Shows the line on User Interface UI
 
-        }else if(currTool == "pencil" || currTool=='eraser'){
-            drawingMode = false;
-        }
-        // alert("Mouse was released at " + xPos + " " + yPos);
-    })
+    //     }else if(currTool == "pencil" || currTool=='eraser'){
+    //         drawingMode = false;
+    //     }
+    //     // alert("Mouse was released at " + xPos + " " + yPos);
+    // })
 
 
-    let red = document.querySelector(".red");       //Way 1
-    let green = document.querySelector(".green");      //Way 2
-    let blue = document.querySelector(".blue");
+    // let red = document.querySelector(".red");       //Way 1
+    // let green = document.querySelector(".green");      //Way 2
+    // let blue = document.querySelector(".blue");
 
-    red.addEventListener("click",function(e){
-        tool.strokeStyle = "lightcoral";
-    });
+    // red.addEventListener("click",function(e){
+    //     tool.strokeStyle = "lightcoral";
+    // });
 
-    green.addEventListener("click",function(e){
-        tool.strokeStyle = "lightgreen";
-    })
+    // green.addEventListener("click",function(e){
+    //     tool.strokeStyle = "lightgreen";
+    // })
 
-    blue.addEventListener("click",function(e){
-        tool.strokeStyle = "lightblue";
-    })
+    // blue.addEventListener("click",function(e){
+    //     tool.strokeStyle = "lightblue";
+    // })
 
 </script>
 </html>
