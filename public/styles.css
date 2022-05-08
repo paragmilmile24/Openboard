@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+.options-cont {
+    height: 4rem;
+    width: 3.5rem;
+    background-color: #f1f2f6;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+.toolbar{
+    border : 1px solid red;
+    border-radius: 4px;
+
+    width: 90vw;
+    /* width: 70vw; */
+    margin: 0 auto;
+
+    /* position: absolute;
+    top: 2rem;
+    left : 20vw; */
+    background-color: #f1f2f6;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.tool-img{
+    height : 50px;
+}
+
+.scale-tools {
+    animation-name: scale-tools;
+    animation-duration: 1s;
+}
+@keyframes scale-tools {
+    0% {
+        transform: scale(0.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.color-container{
+    width : 150px;
+    height: 50px;
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.color{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.red{
+    background-color: lightcoral;
+}
+
+.green{
+    background-color: lightgreen;
+}
+
+.blue{
+    background-color: lightblue;
+}
+
+.size-box{
+    border: 1px solid black;
+    height: 30px;
+    width: 150px;
+    justify-content: space-evenly;
+    align-items: center;
+    display: none;
+}
+
+.size{
+    background-color: black;
+    border-radius: 50%;
+}
+
+.size1{
+    height: 10px;
+    width: 10px;
+}
+
+.size2{
+    height: 14px;
+    width: 14px;
+}
+
+.size3{
+    height: 18px;
+    width: 18px;
+}
+
+.size4{
+    height: 22px;
+    width: 22px;
+}
+
+/* Icons */
+.fas{
+    font-size: 2rem;
+}
+
+/* Stciky Notes */
+
+.minimise{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-color: lightgreen;
+}
+
+.close{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-color: lightcoral;
+}
+
+.sticky{
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+    width: 250px;
+    height: 250px;
+
+    position: absolute;
+    top: 15rem;
+    left: 10rem;
+}
+
+.navbar{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.textarea{
+    height: 211px;
+    width: 245px;
+    border: none;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-top: 1px solid black;
+
+}
