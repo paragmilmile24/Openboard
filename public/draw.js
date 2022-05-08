@@ -7,8 +7,8 @@ let canvas = document.querySelector("canvas");
 let redo = document.querySelector("#redo");
 let undo = document.querySelector("#undo");
 
-let undoRedoTracker = [];
-let track = 0;
+// let undoRedoTracker = [];
+// let track = 0;
 
 let iX,iY,fX,fY;
 
@@ -22,28 +22,28 @@ let drawingMode = false;        //Mousedown = false
 
 canvas.addEventListener("mousedown",function(e){
 
-    let xPos = e.clientX + boardLeft;
-    let yPos = e.clientY - boardTop;
+    // let xPos = e.clientX + boardLeft;
+    // let yPos = e.clientY - boardTop;
 
-    iX = xPos;
-    iY = yPos;
+    // iX = xPos;
+    // iY = yPos;
 
-    console.log("Mouse Pressed");
+    // console.log("Mouse Pressed");
 
-    if(currTool == "pencil" || currTool =="eraser"){
-        drawingMode = true;
-        tool.beginPath();
-        tool.moveTo(iX,iY);
-    }
-
-    // let data = {
-    //     x : e.clientX,
-    //     y : e.clientY
+    // if(currTool == "pencil" || currTool =="eraser"){
+    //     drawingMode = true;
+    //     tool.beginPath();
+    //     tool.moveTo(iX,iY);
     // }
 
+    let data = {
+        x : e.clientX,
+        y : e.clientY
+    }
 
-    // //Send data to server
-    // socket.emit("beginPath",data);
+
+    //Send data to server
+    socket.emit("beginPath",data);
 
     // console.log(currTool);
     
@@ -52,74 +52,86 @@ canvas.addEventListener("mousedown",function(e){
 
 canvas.addEventListener("mousemove",function(e){
 
-    // let data = {
-    //     x : e.clientX,
-    //     y : e.clientY
-    // };
+    let data = {
+        x : e.clientX,
+        y : e.clientY
+    };
 
-    // socket.emit("drawStroke",data);
+    socket.emit("drawStroke",data);
 
-    let xPos = e.clientX + boardLeft;
-    let yPos = e.clientY - boardTop;
+    // let xPos = e.clientX + boardLeft;
+    // let yPos = e.clientY - boardTop;
 
-    fX = xPos;
-    fY = yPos;
+    // fX = xPos;
+    // fY = yPos;
 
-    if(currTool == "pencil" || currTool =="eraser"){
+    // if(currTool == "pencil" || currTool =="eraser"){
         
-        if(drawingMode == true){
+    //     if(drawingMode == true){
 
-            tool.lineTo(fX,fY);
-            tool.stroke();
+    //         tool.lineTo(fX,fY);
+    //         tool.stroke();
 
-            iX = fX;
-            iY = fY;
-        }
-    }
+    //         iX = fX;
+    //         iY = fY;
+    //     }
+    // }
 })
 
 canvas.addEventListener("mouseup",function(e){
 
 
-    // let data = {
-    //     x : e.clientX,
-    //     y : e.clientY
-    // };
+    let data = {
+        x : e.clientX,
+        y : e.clientY
+    };
 
-    // socket.emit("liftedUp",data);
+    socket.emit("liftedUp",data);
 
-    let xPos = e.clientX + boardLeft;
-    let yPos = e.clientY - boardTop;
+    // let xPos = e.clientX + boardLeft;
+    // let yPos = e.clientY - boardTop;
 
-    fX = xPos;
-    fY = yPos;
+    // fX = xPos;
+    // fY = yPos;
 
-    if(currTool == "rect"){
-        tool.strokeRect(iX,iY,fX-iX,fY-iY);
-    }
-    else if(currTool == "line"){
-        tool.beginPath();            //To begin path
-        tool.moveTo(iX,iY);         //Moves to intial cordinates 
-        tool.lineTo(fX,fY);         //Draw mathematically line from final coordinated to intial coordinates
-        tool.stroke();              //Shows the line on User Interface UI
+    // if(currTool == "rect"){
+    //     tool.strokeRect(iX,iY,fX-iX,fY-iY);
+    // }
+    // else if(currTool == "line"){
+    //     tool.beginPath();            //To begin path
+    //     tool.moveTo(iX,iY);         //Moves to intial cordinates 
+    //     tool.lineTo(fX,fY);         //Draw mathematically line from final coordinated to intial coordinates
+    //     tool.stroke();              //Shows the line on User Interface UI
 
-    }else if(currTool == "pencil" || currTool=='eraser'){
-        drawingMode = false;
-    }
+    // }else if(currTool == "pencil" || currTool=='eraser'){
+    //     drawingMode = false;
+    // }
 
-    let url = canvas.toDataURL();
+    // let url = canvas.toDataURL();
 
-    if(track < undoRedoTracker.length - 1)
-        undoRedoTracker[++track] = url;
-    else{
-        undoRedoTracker.push(url);
-        track = undoRedoTracker.length - 1;
-    }
+    // if(track < undoRedoTracker.length - 1){
+    //     undoRedoTracker[++track] = url;
+    //     end = track + 1;
+    // }
+    // else{
+    //     undoRedoTracker.push(url);
+    //     track = undoRedoTracker.length - 1;
+    //     end = track + 1;
+    // }
     
     // alert("Mouse was released at " + xPos + " " + yPos);
 })
 
+let undoRedoTracker = [];
+let initurl = canvas.toDataURL();
+undoRedoTracker.push(initurl);
+let track = 0;
+let end = 1;
+
 undo.addEventListener("click",function(e){
+
+    if(track == 0)
+        return ;
 
     if(track > 0) track--;
 
@@ -129,14 +141,17 @@ undo.addEventListener("click",function(e){
         undoRedoTracker
     }
 
-    // socket.emit("redoUndo",data);
-    undoRedoCanvas(data);
+    socket.emit("redoUndo",data);
+    // undoRedoCanvas(data);
 
     // alert("Functon Ended");
 })
 
 
 redo.addEventListener("click",function(e){
+
+    if(track + 1 == end)
+        return;
 
     if(track < undoRedoTracker.length - 1) track++;
 
@@ -146,8 +161,8 @@ redo.addEventListener("click",function(e){
         undoRedoTracker
     }
 
-    undoRedoCanvas(data);
-    // socket.emit("redoUndo",data);
+    // undoRedoCanvas(data);
+    socket.emit("redoUndo",data);
 })
 
 function undoRedoCanvas(trackObj){
@@ -171,48 +186,51 @@ function undoRedoCanvas(trackObj){
 }
 
 
-// socket.on("beginPath",(data)=>{
+socket.on("beginPath",(data)=>{
 
-//     let xPos = data.x + boardLeft;
-//     let yPos = data.y - boardTop;
+    let xPos = data.x + boardLeft;
+    let yPos = data.y - boardTop;
 
-//     iX = xPos;
-//     iY = yPos;
+    iX = xPos;
+    iY = yPos;
 
-//     console.log("Succesfunlly recieved data" + data.x + " " + data.y);
+    console.log("Succesfunlly recieved data" + data.x + " " + data.y);
 
-//     if(currTool == "pencil" || currTool =="eraser"){
-//         drawingMode = true;
-//         tool.beginPath();
-//         tool.moveTo(data.x,data.y);
-//     }
-// })
+    if(currTool == "pencil" || currTool =="eraser"){
+        console.log("Entered the loop");
+        drawingMode = true;
+        tool.beginPath();
+        tool.moveTo(iX,iY);
+    }
+})
 
-// socket.on("drawStroke",(data)=>{
+socket.on("drawStroke",(data)=>{
 
-//     let xPos = data.x + boardLeft;
-//     let yPos = data.y - boardTop;
+    console.log("Succesfunlly recieved data in drawStroke at fronend : " + data.x + " " + data.y);
 
-//     fX = xPos;
-//     fY = yPos;
+    let xPos = data.x + boardLeft;
+    let yPos = data.y - boardTop;
 
-//     if(currTool == "pencil" || currTool =="eraser"){
+    fX = xPos;
+    fY = yPos;
+
+    if(currTool == "pencil" || currTool =="eraser"){
         
-//         if(drawingMode == true){
+        if(drawingMode == true){
 
-//             tool.lineTo(fX,fY);
-//             tool.stroke();
+            tool.lineTo(fX,fY);
+            tool.stroke();
 
-//             iX = fX;
-//             iY = fY;
-//         }
-//     }
+            iX = fX;
+            iY = fY;
+        }
+    }
 
-// })
+})
 
-// socket.on("redoUndo",(data)=>{
-//     undoRedoCanvas(data);
-// })
+socket.on("redoUndo",(data)=>{
+    undoRedoCanvas(data);
+})
 
 // socket.on("liftedUp",(data)=>{
 
@@ -244,6 +262,40 @@ function undoRedoCanvas(trackObj){
 //         track = undoRedoTracker.length - 1;
 //     }
 // })
+
+socket.on("liftedUp",(data)=>{
+
+    let xPos = data.x + boardLeft;
+    let yPos = data.y - boardTop;
+
+    fX = xPos;
+    fY = yPos;
+
+    if(currTool == "rect"){
+        tool.strokeRect(iX,iY,fX-iX,fY-iY);
+    }
+    else if(currTool == "line"){
+        tool.beginPath();            //To begin path
+        tool.moveTo(iX,iY);         //Moves to intial cordinates 
+        tool.lineTo(fX,fY);         //Draw mathematically line from final coordinated to intial coordinates
+        tool.stroke();              //Shows the line on User Interface UI
+
+    }else if(currTool == "pencil" || currTool=='eraser'){
+        drawingMode = false;
+    }
+
+    let url = canvas.toDataURL();
+
+    if(track < undoRedoTracker.length - 1){
+        undoRedoTracker[++track] = url;
+        end = track + 1;
+    }
+    else{
+        undoRedoTracker.push(url);
+        track = undoRedoTracker.length - 1;
+        end = track + 1;
+    }
+})
 
 
 
