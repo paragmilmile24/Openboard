@@ -194,7 +194,7 @@ socket.on("beginPath",(data)=>{
     iX = xPos;
     iY = yPos;
 
-    console.log("Succesfunlly recieved data" + data.x + " " + data.y);
+    // console.log("Succesfunlly recieved data" + data.x + " " + data.y);
 
     if(currTool == "pencil" || currTool =="eraser"){
         console.log("Entered the loop");
@@ -206,7 +206,7 @@ socket.on("beginPath",(data)=>{
 
 socket.on("drawStroke",(data)=>{
 
-    console.log("Succesfunlly recieved data in drawStroke at fronend : " + data.x + " " + data.y);
+    // console.log("Succesfunlly recieved data in drawStroke at fronend : " + data.x + " " + data.y);
 
     let xPos = data.x + boardLeft;
     let yPos = data.y - boardTop;

@@ -14,6 +14,8 @@ stickyB.addEventListener("click", function (e) {
         </div>
         <textarea name="" class="textarea"></textarea>`;
 
+    
+
     createSticky(stickyTemplateHTML);
 })
 

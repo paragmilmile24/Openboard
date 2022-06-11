@@ -28,21 +28,21 @@
             height : 50px;
             width : 50px;
             border-radius: 50%;
-            background-color: lightcoral;
+            background-color: red;
         }
 
         .green{
             height : 50px;
             width : 50px;
             border-radius: 50%;
-            background-color: lightgreen;
+            background-color: green;
         }
 
-        .blue{
+        .black{
             height : 50px;
             width : 50px;
             border-radius: 50%;
-            background-color: lightblue;
+            background-color: black;
         }
 
         .color-area{
@@ -56,7 +56,7 @@
     <div class="outer">
         <div class="red"></div>
         <div class="green"></div>
-        <div class="blue"></div>
+        <div class="black"></div>
     </div>
 
     <div class="color-area"></div>
@@ -64,23 +64,23 @@
     <script>
         let colorarea = document.querySelector(".color-area");
 
-        colorarea.style.backgroundColor = "lightblue";
+        colorarea.style.backgroundColor = "black";
 
         let outer = document.querySelector(".outer");
         let red = document.querySelector(".red");       //Way 1
         let green = outer.querySelector(".green");      //Way 2
-        let blue = outer.querySelector(".blue");
+        let blue = outer.querySelector(".black");
 
         red.addEventListener("click",function(e){
-            colorarea.style.backgroundColor = "lightcoral";
+            colorarea.style.backgroundColor = "red";
         });
 
         green.addEventListener("click",function(e){
-            colorarea.style.backgroundColor = "lightgreen";
+            colorarea.style.backgroundColor = "green";
         })
 
         blue.addEventListener("click",function(e){
-            colorarea.style.backgroundColor = "lightblue";
+            colorarea.style.backgroundColor = "black";
         })
 
 

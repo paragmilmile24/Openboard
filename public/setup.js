@@ -6,6 +6,6 @@ canvasBoard.width = window.innerWidth;
 // console.log(canvasBoard.height,canvasBoard.width);
 
 let tool = canvasBoard.getContext("2d");
-tool.strokeStyle = "lightcoral";
+tool.strokeStyle = "black";
 
 let currTool = "pencil";
